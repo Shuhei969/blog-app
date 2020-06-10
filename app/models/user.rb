@@ -23,12 +23,35 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :articles, dependent: :destroy
+  has_one :profile, dependent: :destroy
+
+  delegate :birthday, :gender, :age, to: :profile, allow_nil: true
+  # profileモデルからbirthday,genderカラムを引っ張ってこれる。allow_nilは仮に引っ張ってきたのがnilでもエラーにしないでくれる
 
   def has_written?(article)
     articles.exists?(id: article.id)
   end
 
   def display_name
-    self.email.split('@').first
+    # if profile && profile.nickname
+    #   profile.nickname
+    # else
+    #   self.email.split('@').first
+    # end
+
+    profile&.nickname || self.email.split('@').first
+    # ぼっち演算子　profileがあり、そのnicknameがnilじゃなければそのまま表示、なければ右を表示
+  end
+
+  def prepare_profile
+    profile || build_profile
+  end
+
+  def avatar_image
+    if profile&.avatar&.attached?
+      profile.avatar
+    else
+      'default-avatar.png'
+    end
   end
 end
