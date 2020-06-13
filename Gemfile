@@ -26,14 +26,10 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'faker'
-
 gem 'hamlit'
-
 gem 'annotate'
-
 gem 'better_errors'
 gem 'binding_of_caller'
-
 gem 'devise'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -44,6 +40,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
   gem 'rubocop-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
