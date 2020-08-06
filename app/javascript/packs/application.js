@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start()
+// 上記をコメントアウト。2回目に開くページにてturbolinks:loadが起動しないバグがあるため
 require("@rails/activestorage").start()
 require("channels")
 
@@ -19,21 +20,3 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 
-import $ from 'jquery'
-import axios from 'axios'
-// 使いたいファイル(node.js内)をインポートするとweb-packerがうまいこと解釈してくれる
-
-document.addEventListener('turbolinks:load', () => {
-    const dataset = $('#article-show').data()
-    const articleId = dataset.articleId
-    // articleIdってどこから出てきた？メソッド？
-    axios.get(`/articles/${articleId}/like`)
-      .then((response) => {
-          const hasLiked = response.data.hasLiked
-          if (hasLiked) {
-            $(`.active-heart`).removeClass(`hidden`)
-          } else {
-            $(`.inactive-heart`).removeClass(`hidden`)
-          }
-      })
-})
