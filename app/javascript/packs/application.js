@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start()
+// 上記をコメントアウト。2回目に開くページにてturbolinks:loadが起動しないバグがあるため
 require("@rails/activestorage").start()
 require("channels")
 
@@ -18,3 +19,4 @@ require("channels")
 
 require("trix")
 require("@rails/actiontext")
+
